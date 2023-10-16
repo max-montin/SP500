@@ -11,15 +11,21 @@ Below are screenshots of the dashboards I made, and under them you can find a st
 To analyze trading volumes for each day of the week, I converted dates to written formats for clarity.
 First, I converted the full date values to day numbers:
 
-```DayNo = WEEKDAY(SP500_StockPrices_2014_2017[date],1)```
+```
+DayNo = WEEKDAY(SP500_StockPrices_2014_2017[date],1)
+```
 
  I created a new table to match day numbers with their written names and used the ```LOOKUPVALUE``` function:
 
-```Weekday = LOOKUPVALUE(Weekdays[Weekday], Weekdays[DayNo], SP500_StockPrices_2014_2017[DayNo])```
+```
+Weekday = LOOKUPVALUE(Weekdays[Weekday], Weekdays[DayNo], SP500_StockPrices_2014_2017[DayNo])
+```
 
 Next, I measured volatilities by calculating the daily differences between a stock's lowest and highest points.:
 
-```Volatility = SP500_StockPrices_2014_2017[high]-SP500_StockPrices_2014_2017[low]```
+```
+Volatility = SP500_StockPrices_2014_2017[high]-SP500_StockPrices_2014_2017[low]
+```
 
 After calculating the daily volatilities, I needed to find the highest volatility for each stock during the period:
 
@@ -32,7 +38,9 @@ MAXX(FILTER(SP500_StockPrices_2014_2017, SP500_StockPrices_2014_2017[symbol]=z),
 
 I compared the highest volatilities to identify the most volatile dates for each stock:
 
-```MaxDate = IF(SP500_StockPrices_2014_2017[Volatility]=SP500_StockPrices_2014_2017[HighestVolatility], SP500_StockPrices_2014_2017[date].[Date], BLANK())```
+```
+MaxDate = IF(SP500_StockPrices_2014_2017[Volatility]=SP500_StockPrices_2014_2017[HighestVolatility], SP500_StockPrices_2014_2017[date].[Date], BLANK())
+```
 
 Finally, I developed functions to determine the lowest and highest prices for each stock, allowing me to identify the best performers:
 
@@ -51,7 +59,9 @@ MAXX(FILTER(SP500_StockPrices_2014_2017, SP500_StockPrices_2014_2017[symbol]=y),
 
 After finding the individual values, I calculated the increase in percentages to find the best-performing stocks:
 
-```ProfitPercentage = (SP500_StockPrices_2014_2017[HighestHigh]-SP500_StockPrices_2014_2017[LowestLow])/SP500_StockPrices_2014_2017[LowestLow]```
+```
+ProfitPercentage = (SP500_StockPrices_2014_2017[HighestHigh]-SP500_StockPrices_2014_2017[LowestLow])/SP500_StockPrices_2014_2017[LowestLow]
+```
 
 The data used in this project was downloaded from [Maven Analytics](https://www.mavenanalytics.io/data-playground).
 
