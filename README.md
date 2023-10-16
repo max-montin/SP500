@@ -1,6 +1,6 @@
 # S&P 500 analysis from 2014 to 2017
 In this project, I analyzed data that was gathered from the S&P 500 between 2014 and 2017.
-The original data contained daily open/low/high values and trading volumes for each stock on the S&P 500. All other columns have been added by me.
+The original data included daily open/low/high prices, and trading volumes for S&P 500 stocks. All other columns have been added by me.
 
 Below are screenshots of the dashboards I made, and under them you can find a step-by-step description of how I completed this project.
 
@@ -8,16 +8,16 @@ Below are screenshots of the dashboards I made, and under them you can find a st
 
 ![](https://github.com/max-montin/SP500/blob/main/sp500_2.png)
 
-To analyze the trading volumes for different days of the week, I needed to convert the dates to written formats for improved readability.
+To analyze trading volumes for each day of the week, I converted dates to written formats for clarity.
 First, I converted the full date values to day numbers:
 
 ```DayNo = WEEKDAY(SP500_StockPrices_2014_2017[date],1)```
 
-After converting the days to numbers, I made a simple table to find written names for each number and used ```LOOKUPVALUE``` as the function:
+ I created a new table to match day numbers with their written names and used the ```LOOKUPVALUE``` function:
 
 ```Weekday = LOOKUPVALUE(Weekdays[Weekday], Weekdays[DayNo], SP500_StockPrices_2014_2017[DayNo])```
 
-Next, to measure volatilities I calculated the differences between a stock's lowest point and highest point for each day:
+Next, I measured volatilities by calculating the daily differences between a stock's lowest and highest points.:
 
 ```Volatility = SP500_StockPrices_2014_2017[high]-SP500_StockPrices_2014_2017[low]```
 
@@ -30,11 +30,11 @@ RETURN
 MAXX(FILTER(SP500_StockPrices_2014_2017, SP500_StockPrices_2014_2017[symbol]=z), SP500_StockPrices_2014_2017[Volatility])
 ```
 
-Next, I needed to compare the highest volatilities to each day in order to find which dates were the most volatile:
+I compared the highest volatilities to identify the most volatile dates for each stock:
 
 ```MaxDate = IF(SP500_StockPrices_2014_2017[Volatility]=SP500_StockPrices_2014_2017[HighestVolatility], SP500_StockPrices_2014_2017[date].[Date], BLANK())```
 
-Last, to find the best performing stocks from the given period, I created functions to find the lowest and highest prices for each stock:
+Finally, I developed functions to determine the lowest and highest prices for each stock, allowing me to identify the best performers:
 
 ```
 LowestLow = 
@@ -52,5 +52,9 @@ MAXX(FILTER(SP500_StockPrices_2014_2017, SP500_StockPrices_2014_2017[symbol]=y),
 After finding the individual values, I calculated the increase in percentages to find the best-performing stocks:
 
 ```ProfitPercentage = (SP500_StockPrices_2014_2017[HighestHigh]-SP500_StockPrices_2014_2017[LowestLow])/SP500_StockPrices_2014_2017[LowestLow]```
+
+
+
+
 
 The data used in this project was downloaded from [Maven Analytics](https://www.mavenanalytics.io/data-playground).
