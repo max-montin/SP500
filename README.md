@@ -17,5 +17,40 @@ After converting the days to numbers, I made a simple table to find written name
 
 ```Weekday = LOOKUPVALUE(Weekdays[Weekday], Weekdays[DayNo], SP500_StockPrices_2014_2017[DayNo])```
 
+Next, to measure volatilities I calculated the differences between a stock's lowest point and highest point for each day:
+
+```Volatility = SP500_StockPrices_2014_2017[high]-SP500_StockPrices_2014_2017[low]```
+
+After calculating the daily volatilities, I needed to find the highest volatility for each stock during the period:
+
+```
+HighestVolatility = 
+VAR z = SP500_StockPrices_2014_2017[symbol]
+RETURN
+MAXX(FILTER(SP500_StockPrices_2014_2017, SP500_StockPrices_2014_2017[symbol]=z), SP500_StockPrices_2014_2017[Volatility])
+```
+
+Next, I needed to compare the highest volatilities to each day in order to find which dates were the most volatile:
+
+```MaxDate = IF(SP500_StockPrices_2014_2017[Volatility]=SP500_StockPrices_2014_2017[HighestVolatility], SP500_StockPrices_2014_2017[date].[Date], BLANK())```
+
+Last, to find the best performing stocks from the given period, I created functions to find the lowest and highest prices for each stock:
+
+```
+LowestLow = 
+VAR x = SP500_StockPrices_2014_2017[symbol]
+RETURN
+MINX(FILTER(SP500_StockPrices_2014_2017, SP500_StockPrices_2014_2017[symbol]=x), SP500_StockPrices_2014_2017[low])
+```
+```
+HighestHigh = 
+VAR y = SP500_StockPrices_2014_2017[symbol]
+RETURN
+MAXX(FILTER(SP500_StockPrices_2014_2017, SP500_StockPrices_2014_2017[symbol]=y), SP500_StockPrices_2014_2017[high])
+```
+
+After finding the individual values, I calculated the increase in percentages to find the best-performing stocks:
+
+```ProfitPercentage = (SP500_StockPrices_2014_2017[HighestHigh]-SP500_StockPrices_2014_2017[LowestLow])/SP500_StockPrices_2014_2017[LowestLow]```
 
 The data used in this project was downloaded from [Maven Analytics](https://www.mavenanalytics.io/data-playground).
