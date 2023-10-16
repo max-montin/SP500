@@ -21,7 +21,7 @@ DayNo = WEEKDAY(SP500_StockPrices_2014_2017[date],1)
 Weekday = LOOKUPVALUE(Weekdays[Weekday], Weekdays[DayNo], SP500_StockPrices_2014_2017[DayNo])
 ```
 
-Next, I measured volatilities by calculating the daily differences between a stock's lowest and highest points.:
+Next, I measured volatilities by calculating the daily differences between a stock's lowest and highest points:
 
 ```
 Volatility = SP500_StockPrices_2014_2017[high]-SP500_StockPrices_2014_2017[low]
