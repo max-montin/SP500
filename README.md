@@ -6,6 +6,8 @@ Below are screenshots of the dashboards I made, and under them you can find a st
 
 <img src="https://github.com/max-montin/SP500/blob/main/sp500_1.png" width="700"><img src="https://github.com/max-montin/SP500/blob/main/sp500_2.png" width="700">
 
+[Link to Power BI file](https://github.com/max-montin/SP500/blob/main/sp500.pbix)
+
 To analyze trading volumes for each day of the week, I converted dates to written formats for clarity.
 First, I converted the full date values to day numbers:
 
@@ -51,8 +53,6 @@ After finding the individual values, I calculated the increase in percentages to
 
 ```ProfitPercentage = (SP500_StockPrices_2014_2017[HighestHigh]-SP500_StockPrices_2014_2017[LowestLow])/SP500_StockPrices_2014_2017[LowestLow]```
 
-
-
-
-
 The data used in this project was downloaded from [Maven Analytics](https://www.mavenanalytics.io/data-playground).
+
+[CSV file](https://github.com/max-montin/SP500/blob/main/S%26P%20500%20Stock%20Prices%202014-2017.csv)
