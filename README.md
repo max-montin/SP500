@@ -4,7 +4,7 @@ The original data included daily open/low/high prices, and trading volumes for S
 
 Below are screenshots of the dashboards I made, and under them you can find a step-by-step description of how I completed this project.
 
-<img src="https://github.com/max-montin/SP500/blob/main/sp500_1.png" width="700"><img src="https://github.com/max-montin/SP500/blob/main/sp500_2.png" width="700">
+<img src="https://github.com/max-montin/SP500/blob/main/sp500_1.png"><img src="https://github.com/max-montin/SP500/blob/main/sp500_2.png">
 
 [Link to Power BI file](https://github.com/max-montin/SP500/blob/main/sp500.pbix)
 
